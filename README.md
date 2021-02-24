@@ -36,16 +36,9 @@ awk -F "\"*,\"*\"*\"*" '{printf "%d |u %d |i %d\n", $3,$1,$2}' ./data/editedRati
   -f movielens.reg --cache_file movielens.cache
 ```
 
-```
- cat ./data/ratings.vw | \
-  ./vowpal_wabbit/build/vowpalwabbit/vw /dev/stdin -b 18 -q ui --rank 10 --l2 0.001 \
-  --learning_rate 0.015 --passes 20 --decay_learning_rate 0.97 --power_t 0 \
-  -f movielens.reg --cache_file movielens.cache
-```
-
 To build a readable model 
 ```
-cat ./data/ratings.vw |  
+awk -F "\"*,\"*\"*\"*" '{printf "%d |u %d |i %d\n", $3,$1,$2}' ./data/editedRatings.csv | 
   ./vowpal_wabbit/build/library/gd_mf_weights -I /dev/stdin --vwparams '-q ui --rank 10 --l2 0.001 --learning_rate 0.015 --passes 20 --decay_learning_rate 0.97 --power_t 0 -i movielens.reg --cache_file movielens.cache' 
 ```
 
@@ -64,9 +57,9 @@ best constant = 2284.861328
 total feature number = 294850915
 ```
 
-<strong>Update - Keegan</strong>
+<strong>Update - Keegan - 02/23/21</strong>
 
-I ran again on 02/23/21 and got acutal data instead of the nans.
+I ran again and got acutal data instead of the nans.
 
 This data is in the `.quadratic` `.linear` and constant files. 
 This is a readble version of the movielens.reg
