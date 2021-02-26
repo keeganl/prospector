@@ -65,3 +65,13 @@ This data is in the `.quadratic` `.linear` and constant files.
 This is a readble version of the movielens.reg
 
 Also leaving out cache because it is to big for Github.
+
+How to interpret the output: 
+
+```
+constant: a float for the global constant
+i.linear: featureweight
+i.quadratic: featurerank1 weightrank2 weight...rankK weight
+u.linear: featureweight
+u.quadratic: featurerank1 weightrank2 weight...rankK weight
+```
