@@ -1,3 +1,10 @@
+data
+vowpal_wabbit
+*.cache
+*.reg
+*.quadratic 
+*.linear
+constant
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
