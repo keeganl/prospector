@@ -40,10 +40,11 @@ dotProds = []
 
 # loop through and dot product the rows
 for i in range(0, len(arr_i)):
-    x = Weight("{}:{}".format(arr_i[i].id, arr_u[i].id), np.dot(arr_i[i].weights, arr_u[i].weights))
+    x = Weight("{}:{}".format(arr_u[i].id, arr_i[i].id), np.dot(arr_u[i].weights, arr_i[i].weights))
     dotProds.append(x)
 
 with open('result.txt', 'w') as f:
+    f.write("userId\tmovieId\t rating\n")
     for item in dotProds:
         f.write("{}\t{}\n".format(item.index, item.val))
 
