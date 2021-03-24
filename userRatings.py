@@ -1,9 +1,14 @@
+# Keegan Lawley
+
 import numpy.matlib 
 import numpy as np
 import time
 import datetime
 import pandas as pd
+import xlsxwriter
 
+totalUsers = 99179
+totalMovies = 2614
 
 class Item:
     def __init__(self, id, weights):
@@ -37,16 +42,33 @@ arr_i = buildArray('i.quadratic')
 arr_u  = buildArray('u.quadratic') 
 
 dotProds = []
+watchedMovies = []
 
-# loop through and dot product the rows
 for i in range(0, len(arr_i)):
-    x = Weight("{}:{}".format(arr_u[i].id, arr_i[i].id), np.dot(arr_u[i].weights, arr_i[i].weights))
+    x = Weight((arr_u[i].id, arr_i[i].id), np.dot(arr_u[i].weights, arr_i[i].weights))
     dotProds.append(x)
+    watchedMovies.append((arr_u[i].id, arr_i[i].id))
 
-with open('result.txt', 'w') as f:
-    f.write("userId\tmovieId\t rating\n")
-    for item in dotProds:
-        f.write("{}\t{}\n".format(item.index, item.val))
+seenMovies = np.zeros((totalUsers,totalMovies))
+for watch in watchedMovies:
+    print(str(watch[0]) + "\t" + str(watch[1]))
+    seenMovies[watch[0]-1 ][watch[1]-1] = 1
+
+df = pd.DataFrame (seenMovies)
+print(df)
+# filepath = 'my_excel_file.xlsx'
+
+# df.to_excel(filepath, index=False)
+
+# uncomment if results.txt needs to be built
+# with open('result.vw', 'w') as f:
+#     f.write("userId\tmovieId\t rating\n")
+#     for item in dotProds:
+#         f.write("{}\t{}\n".format(item.index, item.val))
+
+# workbook = xlsxwriter.Workbook('Expenses01.xlsx')
+# worksheet = workbook.add_worksheet()
+
 
 tEnd = time.perf_counter()
 calcTime = tEnd - tStart
