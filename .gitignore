@@ -1,3 +1,13 @@
+*.quadratic
+*.linear
+*.cache
+*.zip
+*.pdf
+*.reg
+gd_mf_weights
+/data
+constant
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]

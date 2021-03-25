@@ -1,12 +1,12 @@
 import pandas as pd
 
-revenueEdited = pd.read_csv("revenueEdited.csv")
+revenueEdited = pd.read_csv("../data/revenueEdited.csv")
 print("Edited Revenue Movie dataset")
 print(revenueEdited)
 print("\n")
 
 
-ratingsdf = pd.read_csv("../archive/ratings.csv")
+ratingsdf = pd.read_csv("../data/ratings.csv")
 print("Ratings dataset")
 print(ratingsdf)
 
@@ -19,4 +19,4 @@ for index, row in ratingsdf.iterrows():
 
 ratingsEdited = pd.concat(dataFrames)
 print(ratingsEdited)
-ratingsEdited.to_csv("editedRatings.csv")
+ratingsEdited.to_csv("../data/editedRatings.csv")
