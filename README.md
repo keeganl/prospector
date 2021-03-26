@@ -75,3 +75,23 @@ i.quadratic: featurerank1 weightrank2 weight...rankK weight
 u.linear: featureweight
 u.quadratic: featurerank1 weightrank2 weight...rankK weight
 ```
+
+### Linear Regression 
+
+To perform the linear regression I (Keegan) needed to build a sparse matrix from the data and then attach the metadata as features to the model.
+
+I used this snippet to build the sparse matrix: 
+The watched movies are the user-movie tuple from the readable model 
+```python
+seenMovies = np.zeros((totalUsers,totalMovies))
+for watch in watchedMovies:
+    # print(str(watch[0]) + "\t" + str(watch[1]))
+    seenMovies[watch[0]-1][watch[1]-1] = 1
+```
+
+Ran into an issue where we had to re-ID the movies after Braeden cleaned the data. So he went back and did that and sent me the the new files to redo the matrix factorization and rebuild the readable model
+
+From here I get all the metadata for the movies, for genre I flattened the array to be the genre names. This increases the size of the matrix but seemed to be the best way to represent this feature. 
+
+
+The vw file built for the linear regression was huge 30 GB!!
