@@ -75,6 +75,7 @@ i.quadratic: featurerank1 weightrank2 weight...rankK weight
 u.linear: featureweight
 u.quadratic: featurerank1 weightrank2 weight...rankK weight
 ```
+<strong>Update - Keegan - 03/21/21</strong>
 
 ### Linear Regression 
 
@@ -91,7 +92,12 @@ for watch in watchedMovies:
 
 Ran into an issue where we had to re-ID the movies after Braeden cleaned the data. So he went back and did that and sent me the the new files to redo the matrix factorization and rebuild the readable model
 
-From here I get all the metadata for the movies, for genre I flattened the array to be the genre names. This increases the size of the matrix but seemed to be the best way to represent this feature. 
+From here I get all the metadata for the movies, for genre I flattened the array to be the genre names. This increases the size of the matrix but seemed to be the best way to represent this feature. The I could just pass this to vowpal wabbit and it would get binary encoded through them by default. The code to do all of this work is in `userRatings.py`  
 
 
 The vw file built for the linear regression was huge 30 GB!!
+After running the regression this was the result: 
+
+<img src="./images/result of linear regression.png" />
+
+At the time of submitting the report I started testing the model and that involves grabbing some metadata for movies that were not in the dataset and running them against the model. 
