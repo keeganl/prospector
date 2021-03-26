@@ -87,16 +87,16 @@ for i in range(0, len(arr_i)):
     watchedMovies.append((arr_u[i].id, arr_i[i].id))
 
 
-# build 0-1 matrix (extremely sparse)
-seenMovies = np.array(totalUsers,totalMovies)
-seenMovies.fill(-1)
+# build -1/1 matrix (extremely sparse)
+seenMovies = np.ones((totalUsers,totalMovies))
+seenMovies = np.negative(seenMovies)
 for watch in watchedMovies:
     # print(str(watch[0]) + "\t" + str(watch[1]))
     seenMovies[watch[0]-1][watch[1]-1] = 1
         
 print(len(allMovieMetadata))
 
-# assign metadata for linear regression, this model is 30 GB!!
+# assign metadata for logistic regression, this model is 30 GB!!
 with open('data.vw', 'w') as f:
     for i in range(totalUsers):
         print("processing user: " + str(i) + " ...")
