@@ -1,12 +1,16 @@
-*.quadratic
-*.linear
-*.cache
-*.zip
-*.pdf
-*.reg
-gd_mf_weights
 /data
+vowpal_wabbit
+*.cache
+*.reg
+*.quadratic 
+*.linear
 constant
+*.vw
+*.csv
+*.xlsx
+*.pdf
+*.zip
+gd_mf_weights
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
