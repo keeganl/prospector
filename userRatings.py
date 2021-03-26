@@ -88,7 +88,8 @@ for i in range(0, len(arr_i)):
 
 
 # build 0-1 matrix (extremely sparse)
-seenMovies = np.zeros((totalUsers,totalMovies))
+seenMovies = np.array(totalUsers,totalMovies)
+seenMovies.fill(-1)
 for watch in watchedMovies:
     # print(str(watch[0]) + "\t" + str(watch[1]))
     seenMovies[watch[0]-1][watch[1]-1] = 1

@@ -6,6 +6,10 @@ The Prospectors
 #### Keegan Lawley - `kwl17`
 #### Braeden Warnick - `bmw16m`
 
+### Dataset
+
+https://www.kaggle.com/rounakbanik/the-movies-dataset
+
 
 ### Project Stage Reports
 Stage 1: https://docs.google.com/document/d/1m9Min-U_t9d1X2JtwzepPQg_d0Q6kB_cKwT9SIDEyU0/edit
@@ -84,7 +88,7 @@ u.quadratic: featurerank1 weightrank2 weight...rankK weight
 
 ### Linear Regression 
 
-To perform the linear regression I (Keegan) needed to build a sparse matrix from the data and then attach the metadata as features to the model.
+To perform the logistic regression I (Keegan) needed to build a sparse matrix from the data and then attach the metadata as features to the model.
 
 I used this snippet to build the sparse matrix: 
 The watched movies are the user-movie tuple from the readable model 
@@ -100,9 +104,14 @@ Ran into an issue where we had to re-ID the movies after Braeden cleaned the dat
 From here I get all the metadata for the movies, for genre I flattened the array to be the genre names. This increases the size of the matrix but seemed to be the best way to represent this feature. The I could just pass this to vowpal wabbit and it would get binary encoded through them by default. The code to do all of this work is in `userRatings.py`  
 
 
-The vw file built for the linear regression was huge 30 GB!!
+The vw file built for the logistic regression was huge, 30 GB!!
+
+Vowpal command for logistic regression: 
+
+`vw train.vw -f model.vw --loss_function logistic`
+
 After running the regression this was the result: 
 
-<img src="./images/result of linear regression.png" />
+<img src="./images/result of logistic regression.png" />
 
 At the time of submitting the report I started testing the model and that involves grabbing some metadata for movies that were not in the dataset and running them against the model. 
