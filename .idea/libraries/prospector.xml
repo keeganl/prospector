@@ -1,0 +1,10 @@
+<component name="libraryTable">
+  <library name="prospector">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/editedFiles.zip!/" />
+      <root url="jar://$PROJECT_DIR$/readable_model.zip!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

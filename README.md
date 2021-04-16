@@ -66,3 +66,46 @@ awk -F "\"*,\"*\"*\"*" '{printf "%d |u %d |i %d\n", $3,$1,$2}' ./data/editedRati
 To classify revenue per the paper I use this script `utils/revenueSeparator.py` this is built from the likelihood.csv that is generated from the `utils/generate_nnls_data.py` script
 
 `utils/nnls_revenue_metrics.py` This file depends on the csvs generated from the above file to then train, test, and evaluate the non-negative least squares regression model on revenue movie.
+
+#### Braeden:
+
+Since the data was processed several times over the course of the semester, the data included in this repository for my section covers only the 3 data files used for running the main XGBoost models. The files needed for the Data Cleansing section can be found from our kaggle link and the rest are simply intermediary files used while working to get the data into proper form.
+
+<strong>XGBoost Models</strong>
+
+`xgBoost.py` This file contains the code that performs and tests the first binary logistic xgBoost model. Data file used `binaryXGBoostData.csv`
+
+`highDim.py` This file contains the code that performs and tests the high dimensional second xgBoost model. Data file used `hiRevenueReclass.csv`
+
+`lowDim.py` This file contains the code that performs and tests the low dimensional third xgBoost model. Data file used `loRevenueReclass.csv`
+
+<strong>Data Cleansing</strong>
+
+`dataCleanser.py` This file reads in the original movie metadata file and filters it by paper's original requirements.
+
+`ratingsCleanser.py` This file reads in the original ratings file and filters out the movies that were removed by the previous files.
+
+<strong>Major Utility</strong>
+
+`resultsMetaCombine.py` This file reads in the results from the user x movie likelihoods and then builds a dataframe consisting of the likelihood data and the metadata for the associated movie.
+
+`cleanGenres.py` This file reads in a file that contains a column of unrefined genres data, and cleans the column to consist of only an array of genre strings.
+
+`appendingGenres.py` This file reads in a file that is result from `cleanGenres.py` and appends a column for each possible genre, marking the cell for the current movie a 1 or a 0 based on the existence of that column in the genre list for that movie. Both `cleanGenres.py` and `appendingGenres.py` are used for various files throughout the process of building the datasets for each model.
+
+`revenueClassifier.py` This file reads in a file and reclassifies the revenue column to be one of nine results based on how it falls into the brackets introduced in the works surveyed.
+
+`sumLowDimData.py` This file reads in the movie metadata and the likelihood results and aggregates the total movie-goer probability for each film.
+
+`classifyBinaryBoost.py` This file simply classifies the likelihood for the first model into a binary format.
+
+<strong>Minor Utility</strong>
+
+`reID.py` This file reIDs the movies after the beginning filtering process was done.
+
+`makeHiScreeningData.py` This file was written in the attempt at building the datasets to simulate small film screenings. This file led us to the conclusion our data was too insignificant in size to test that way.
+
+`reformatModelforPandas.py` This file parses the likelihood results in a text file and builds a usable dataframe and csv from them for easier use later.
+
+`middleLowDimClean.py` This file was used to help process data for the low dimensional model.
+
