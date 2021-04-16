@@ -8,7 +8,7 @@ import pandas as pd
 import xlsxwriter
 import json
 
-totalUsers = 99179
+totalUsers = 10000
 totalMovies = 2614
 
 class Item:
@@ -64,8 +64,31 @@ def getMetadata():
         m = MovieMetadata(row.id, obj)
         genreArr = []
         genreObj = row.genres.replace("'", '"')
+        gHardcoded = {
+            'Comedy': 0,
+            'Drama': 0,
+            'Romance': 0,
+            'Adventure': 0,
+            'Fantasy': 0,
+            'Action': 0,
+            'Mystery': 0,
+            'Thriller': 0,
+            'Science Fiction': 0,
+            'Horror': 0,
+            'Music': 0,
+            'Family': 0,
+            'Crime': 0,
+            'Western': 0,
+            'Animation': 0,
+            'War': 0,
+            'History': 0,
+            'Documentary': 0
+        }
+        # once the number of genres is know just fix here
         for g in json.loads(genreObj):
-            genreArr.append(g["name"])
+            gHardcoded[g["name"]] = 1
+        genreArr = list(gHardcoded.values())
+        print(genreArr)
         obj['genres'] = genreArr
         # print( obj['genres'])
         arr.append(m)
@@ -81,7 +104,7 @@ allMovieMetadata = getMetadata()
 dotProds = []
 watchedMovies = []
 
-for i in range(0, len(arr_i)):
+for i in range(0, 10000):
     x = Weight((arr_u[i].id, arr_i[i].id), np.dot(arr_u[i].weights, arr_i[i].weights))
     dotProds.append(x)
     watchedMovies.append((arr_u[i].id, arr_i[i].id))
@@ -97,6 +120,7 @@ for watch in watchedMovies:
 print(len(allMovieMetadata))
 
 # assign metadata for logistic regression, this model is 30 GB!!
+dfs = []
 with open('data.vw', 'w') as f:
     for i in range(totalUsers):
         print("processing user: " + str(i) + " ...")
@@ -105,12 +129,24 @@ with open('data.vw', 'w') as f:
             # print("J", j)
             m = allMovieMetadata[j-1].metadata
             # print("M", m)
-            data = str(seenMovies[i][j]) + ' | ' + str(m['budget']) + ' ' + str(m['popularity']) + ' ' + str(m['revenue']) + ' ' + str(m['runtime']) + ' ' + str(m['release_date']) + ' ' + str(m['vote_average']) + ' ' + str(m['vote_count']) + ' ' + " ".join(m['genres']) + "\n"
-            f.write(data)
-        
+
+            data = [seenMovies[i][j], str(m['budget']),
+            str(m['popularity']),
+            str(m['revenue']),
+            str(m['runtime']), 
+            str(m['release_date']), 
+            str(m['vote_average']), 
+            str(m['vote_count'])] + m['genres']
+
+            # dataStr = str(seenMovies[i][j]) + ' | ' + str(m['budget']) + ' ' + str(m['popularity']) + ' ' + str(m['revenue']) + ' ' + str(m['runtime']) + ' ' + str(m['release_date']) + ' ' + str(m['vote_average']) + ' ' + str(m['vote_count']) + ' ' + " ".join(m['genres']) + "\n"
+            dfs.append(data)
+            # f.write(dataStr)
+df = pd.DataFrame(dfs)      
+df.to_csv('model.csv')
+# df.columns = ['seenMovie', 'budget', 'popularity', 'revenue', 'runtime', 'release_date', 'vote_average', 'vote_count', 'Comedy','Drama','Romance','Adventure','Fantasy','Action','Mystery','Thriller','Science Fiction','Horror','Music','Family','Crime','Western','Animation','War','History','Documentary']
 
 # df = pd.DataFrame (seenMovies)
-# print(df)
+print(df)
 # filepath = 'my_excel_file.xlsx'
 
 # df.to_excel(filepath, index=False)
