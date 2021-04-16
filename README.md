@@ -29,6 +29,8 @@ Stage 4: https://docs.google.com/document/d/1nVRdeflacWX3CssgmYCUWl6ccA4PxinxwIC
 
 #### Keegan: 
 
+The only data I didn't write was the 2 gb model and the metadata for the sparse matrix in the logistic case as they were too large but there are details below for how to build them
+
 <strong>Vowpal Wabbit</strong>
 
 This work was done using the Vowpal Wabbit cli tool 
@@ -55,7 +57,7 @@ awk -F "\"*,\"*\"*\"*" '{printf "%d |u %d |i %d\n", $3,$1,$2}' ./data/editedRati
 
 `utils/generatingMovieViewingProb.py` This file computes the dot product of the feature weight vectors  for each movie and user that was the result of the readable Vowpal Wabbit model. 
 
-`generateSparseMatrix.py` This file generates the model.csv which is the sparse matrix with metadata. It uses user and movie files from the matrix factorization because the ids were already listed there and they were easy to grab. It is almost 20GB but will generate in about 12 minutes. 
+`generateSparseMatrix.py` This file generates the model.csv which is the sparse matrix with metadata. It uses user and movie files from the matrix factorization because the ids were already listed there and they were easy to grab. It is almost 2GB but will generate in about 12 minutes. 
 
 `utils/splitLogRegModel.py` The data ended up needing to be split into features and labels for sklearn so this file accomplishes that for the first logistic regression model while also storing the dataframes into csv so that this process does not need to occur every time.
 
