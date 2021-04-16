@@ -10,6 +10,10 @@ The Prospectors
 
 https://www.kaggle.com/rounakbanik/the-movies-dataset
 
+### Video
+
+https://youtu.be/IU-i1TU6ba8
+
 
 ### Project Stage Reports
 Stage 1: https://docs.google.com/document/d/1m9Min-U_t9d1X2JtwzepPQg_d0Q6kB_cKwT9SIDEyU0/edit
