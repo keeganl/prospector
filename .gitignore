@@ -1,4 +1,4 @@
-/data
+/fulldata
 vowpal_wabbit
 *.cache
 *.reg
@@ -9,7 +9,6 @@ constant
 *.csv
 *.xlsx
 *.pdf
-*.zip
 gd_mf_weights
 
 # Byte-compiled / optimized / DLL files
